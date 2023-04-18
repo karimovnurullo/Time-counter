@@ -16,12 +16,8 @@ class Watch {
     this.counter = 0;
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
-    this.duration = this.duration.bind(this);
-    // [startBtn, stopBtn, durationBtn].forEach(btn => btn.addEventListener('click', this[btn.dataset.action]));
-    // [startBtn, stopBtn, durationBtn].forEach(btn => btn.addEventListener('click', this[btn.dataset.method]));
-    startBtn.addEventListener('click', this.start);
-    stopBtn.addEventListener('click', this.stop);
-    durationBtn.addEventListener('click', this.duration);
+    this.duration = this.duration.bind( this);
+    [startBtn, stopBtn, durationBtn].forEach(btn => btn.addEventListener('click', this[btn.dataset.action]));
   }
   start() {
     if (this.isStart) {
