@@ -1,18 +1,11 @@
-
-const startBtn = document.querySelector('.start');
-const stopBtn = document.querySelector('.stop');
-const durationBtn = document.querySelector('.duration');
-const min = document.querySelector('.min');
-const sec = document.querySelector('.sec');
+const [startBtn, stopBtn, durationBtn] = [document.querySelector('.start'), document.querySelector('.stop'), document.querySelector('.duration')];
+const [min, sec] = [document.querySelector('.min'), document.querySelector('.sec')];
 const alertEl = document.querySelector('.alert');
-
 
 function getInterval(className, text) {
   alertEl.textContent = text;
   alertEl.classList.add(className);
-  setTimeout(() => {
-    alertEl.classList.remove(className);
-  }, 1500);
+  setTimeout(() => alertEl.classList.remove(className), 1500);
 }
 
 class Watch {
@@ -24,6 +17,8 @@ class Watch {
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
     this.duration = this.duration.bind(this);
+    // [startBtn, stopBtn, durationBtn].forEach(btn => btn.addEventListener('click', this[btn.dataset.action]));
+    // [startBtn, stopBtn, durationBtn].forEach(btn => btn.addEventListener('click', this[btn.dataset.method]));
     startBtn.addEventListener('click', this.start);
     stopBtn.addEventListener('click', this.stop);
     durationBtn.addEventListener('click', this.duration);
@@ -35,12 +30,11 @@ class Watch {
     }
     startBtn.textContent = "Started";
     stopBtn.textContent = "Stop";
-    document.querySelector('.top').classList.remove('show');
-    document.querySelector('.hidden').classList.remove('show');
+    [...document.querySelectorAll('.top, .hidden')].forEach(el => el.classList.remove('show'));
     this.counter = 0;
     this.isStart = true;
     getInterval("start", "Watch started");
-    this.interval = setInterval(() => this.counter++ , 1000);
+    this.interval = setInterval(() => this.counter++, 1000);
   };
   stop() {
     if (!this.isStart) {
